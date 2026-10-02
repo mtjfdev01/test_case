@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import GetQuotePage from "@/components/quote/GetQuotePage";
+import Footer from "@/components/home/Footer";
 
 export const metadata: Metadata = {
   title: "Get a Custom Quote | Brandsface",
@@ -8,5 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default function QuotePage() {
-  return <GetQuotePage />;
+  return (
+    <>
+      <GetQuotePage />
+      <Footer showCtaBanner={false} />
+    </>
+  );
 }

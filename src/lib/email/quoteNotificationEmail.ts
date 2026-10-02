@@ -31,6 +31,12 @@ const BODY = `
                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 24px;border:1px solid #e2e8f0;border-radius:12px;">
                   <tr>
                     <td style="padding:14px 16px;border-bottom:1px solid #e2e8f0;">
+                      <p style="margin:0 0 4px;font-size:12px;color:#64748b;">Name</p>
+                      <p style="margin:0;font-size:15px;color:#103a2a;">{{customer_name}}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:14px 16px;border-bottom:1px solid #e2e8f0;">
                       <p style="margin:0 0 4px;font-size:12px;color:#64748b;">Email</p>
                       <p style="margin:0;font-size:15px;color:#103a2a;">{{customer_email}}</p>
                     </td>
@@ -84,6 +90,12 @@ function escapeHtml(value: string): string {
     .replace(/"/g, "&quot;");
 }
 
+function displayName(name: string | null | undefined) {
+  const value = (name ?? "").trim();
+  if (!value || value === "Quote Lead") return "Not provided";
+  return value;
+}
+
 function displayEmail(email: string): string {
   const value = email.trim();
   if (!value || value.endsWith("@leads.Brandsface.local")) return "Not provided";
@@ -92,6 +104,7 @@ function displayEmail(email: string): string {
 
 export type NotifyAdminOfQuoteParams = {
   quoteId: number;
+  fullName: string;
   email: string;
   phone: string | null;
   requirement: string;
@@ -111,6 +124,7 @@ export async function notifyAdminOfQuoteRequest(
   }
 
   const customerEmail = displayEmail(params.email);
+  const customerName = displayName(params.fullName);
   const replyTo = EMAIL_RE.test(customerEmail) ? customerEmail : undefined;
   const requirement = params.requirement.trim() || "No additional details provided.";
   const attachmentHtml = params.attachmentPaths.length
@@ -129,6 +143,7 @@ export async function notifyAdminOfQuoteRequest(
     replyTo,
     data: {
       quote_id: params.quoteId,
+      customer_name: escapeHtml(customerName),
       customer_email: escapeHtml(customerEmail),
       customer_phone: escapeHtml(params.phone?.trim() || "Not provided"),
       requirement: escapeHtml(requirement).replace(/\n/g, "<br />"),

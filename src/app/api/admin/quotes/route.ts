@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic";
 
 type QuoteRow = {
   id: number;
+  full_name: string | null;
   phone: string | null;
   requirement: string | null;
   attachment_paths: string[] | null;
@@ -44,6 +45,7 @@ export async function GET(request: Request) {
     const result = await dbQuery<QuoteRow>(
       `SELECT
         id,
+        full_name,
         phone,
         requirement,
         attachment_paths,

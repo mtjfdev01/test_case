@@ -7,6 +7,7 @@ import PageLoader from "@/components/common/PageLoader";
 
 type Quote = {
   id: number;
+  full_name?: string | null;
   phone: string | null;
   requirement: string | null;
   attachment_paths: string[] | null;
@@ -34,6 +35,12 @@ const STATUS_LABELS: Record<(typeof STATUS_OPTIONS)[number], string> = {
 };
 
 const FILTER_STORAGE_KEY = "admin_quotes_filters";
+
+function displayName(name: string | null | undefined) {
+  const value = (name ?? "").trim();
+  if (!value || value === "Quote Lead") return "—";
+  return value;
+}
 
 function truncateText(text: string | null | undefined, max = 80) {
   const value = (text ?? "").trim();
@@ -299,6 +306,7 @@ export default function AdminQuotesPage() {
               <thead>
                 <tr className="border-b border-slate-100 bg-slate-50/80 text-left text-[11px] font-semibold uppercase tracking-wider text-slate-500">
                   <th className="px-4 py-3.5 sm:px-5">ID</th>
+                  <th className="px-4 py-3.5 sm:px-5">Name</th>
                   <th className="px-4 py-3.5 sm:px-5">Requirement</th>
                   <th className="px-4 py-3.5 sm:px-5">Status</th>
                   <th className="px-4 py-3.5 sm:px-5">Created</th>
@@ -316,6 +324,11 @@ export default function AdminQuotesPage() {
                         <span className="inline-flex rounded-lg bg-slate-100 px-2 py-0.5 font-mono text-xs font-semibold text-slate-700">
                           #{quote.id}
                         </span>
+                      </td>
+                      <td className="max-w-[180px] px-4 py-3.5 sm:px-5">
+                        <p className="truncate font-medium text-slate-800" title={displayName(quote.full_name)}>
+                          {displayName(quote.full_name)}
+                        </p>
                       </td>
                       <td className="max-w-[220px] px-4 py-3.5 sm:px-5">
                         <p

@@ -30,6 +30,7 @@ export async function POST(request: Request) {
     let phone = "";
     let email = "";
     let requirement = "";
+    let fullName = "";
     let attachment: File | null = null;
 
     if (contentType.includes("multipart/form-data")) {
@@ -37,6 +38,7 @@ export async function POST(request: Request) {
       phone = getString(formData, "phone");
       email = getString(formData, "email").toLowerCase();
       requirement = getString(formData, "requirement");
+      fullName = getString(formData, "fullName");
       const raw = formData.get("attachment");
       if (raw instanceof File && raw.size > 0) attachment = raw;
     } else {
@@ -49,6 +51,7 @@ export async function POST(request: Request) {
       phone = body.phone?.trim() ?? "";
       email = body.email?.trim().toLowerCase() ?? "";
       requirement = body.requirement?.trim() ?? "";
+      fullName = body.fullName?.trim() ?? "";
     }
 
     const phoneDigits = digitsOnly(phone);
@@ -110,6 +113,7 @@ export async function POST(request: Request) {
     }
 
     const storedPhone = hasPhone ? phone : null;
+    const storedName = fullName || "Quote Lead";
     const customerEmail = hasEmail
       ? email
       : `quote.${phoneDigits}@leads.Brandsface.local`;
@@ -117,7 +121,7 @@ export async function POST(request: Request) {
 
     const customerId = await upsertCustomerFromLead({
       email: customerEmail,
-      fullName: "Quote Lead",
+      fullName: storedName,
       phone: storedPhone,
       company: null,
     });
@@ -146,13 +150,14 @@ export async function POST(request: Request) {
         $1, $2, $3, NULL, 0, 0, 0, NULL, NULL, '{}'::text[], NULL, '{}'::text[], NULL, 1, $4, $5::text[], $6
       )
       RETURNING id`,
-      ["Quote Lead", quoteEmail, storedPhone, requirement, attachmentPaths, customerId],
+      [storedName, quoteEmail, storedPhone, requirement, attachmentPaths, customerId],
     );
 
     const quoteId = inserted.rows[0]?.id ?? null;
     if (quoteId) {
       const notify = await notifyAdminOfQuoteRequest({
         quoteId,
+        fullName: storedName,
         email: quoteEmail,
         phone: storedPhone,
         requirement,

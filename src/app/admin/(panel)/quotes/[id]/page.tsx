@@ -44,6 +44,12 @@ function displayEmail(email: string | null | undefined) {
   return value;
 }
 
+function displayName(name: string | null | undefined) {
+  const value = (name ?? "").trim();
+  if (!value || value === "Quote Lead") return "—";
+  return value;
+}
+
 export default function AdminQuoteDetailPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const [quote, setQuote] = useState<QuoteDetail | null>(null);
@@ -105,7 +111,7 @@ export default function AdminQuoteDetailPage({ params }: { params: { id: string 
           <div>
             <h1 className="text-2xl font-black text-slate-900">Quote Request #{params.id}</h1>
             <p className="mt-1 text-sm text-slate-600">
-              Email, phone, requirement, and any uploaded image from the quote form.
+              Email, phone, name, requirement, and any uploaded image from the quote form.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
@@ -137,6 +143,7 @@ export default function AdminQuoteDetailPage({ params }: { params: { id: string 
         ) : (
           <div className="space-y-5">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <Info label="Name" value={displayName(quote.full_name)} />
               <Info label="Email" value={displayEmail(quote.email)} />
               <Info label="Phone" value={quote.phone || "—"} />
               <Info label="Status" value={quote.status} />

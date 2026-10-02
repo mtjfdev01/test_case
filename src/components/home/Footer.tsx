@@ -333,13 +333,14 @@ function FooterMobileAccordion({ title, children }: { title: string; children: R
   );
 }
 
-export default function Footer() {
+export default function Footer({ showCtaBanner = true }: { showCtaBanner?: boolean }) {
   const year = new Date().getFullYear();
   const addressSingleLine = SITE_ADDRESS_LINES.join(", ");
 
   return (
     <footer className="relative w-full overflow-hidden">
       {/* ── CTA banner (same surface color as main footer) ── */}
+      {showCtaBanner ? (
       <div
         className="relative z-10 w-full border-b border-white/10 bg-[var(--dark-primary-green)] px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-8"
       >
@@ -418,6 +419,7 @@ export default function Footer() {
         </div>
         </div>
       </div>
+      ) : null}
 
       {/* ── Main footer columns ── */}
       <div className="relative z-10 w-full bg-[var(--dark-primary-green)] text-white">
