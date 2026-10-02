@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import { Inter, Playfair_Display } from 'next/font/google';
 import TawkToScript from '@/components/TawkToScript';
 import WhatsAppChatFab from '@/components/WhatsAppChatFab';
@@ -41,6 +42,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18488186746"
+          strategy="afterInteractive"
+        />
+        <Script id="google-gtag-aw" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18488186746');
+          `}
+        </Script>
+      </head>
       <body className={`${inter.className} ${playfair.variable}`}>
         <NavigationLoader />
         <SiteHeader />
