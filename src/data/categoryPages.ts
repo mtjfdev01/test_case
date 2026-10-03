@@ -231,7 +231,7 @@ export function getAllCatalogProductSlugs(): string[] {
   return slugs;
 }
 
-/** How many PDPs to list in the sitemap (and allow in robots.txt) per category hub. */
+/** How many PDPs to list in the sitemap (and mark indexable) per category hub. */
 export const SITEMAP_PRODUCTS_PER_CATEGORY = 3;
 
 const CORE_TAB_ID = "core_products";

@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { HOME_CARDS } from "@/data/homeCards";
-import { getCategoryPageConfig, getCategorySlugForProduct } from "@/data/categoryPages";
+import {
+  getCategoryPageConfig,
+  getCategorySlugForProduct,
+  getSitemapFeaturedProductSlugs,
+} from "@/data/categoryPages";
 
 export function siteOrigin(): string {
   const fromEnv = process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "").trim();
@@ -331,11 +335,17 @@ export function productShareMetadata(
   const cfg = categorySlug ? getCategoryPageConfig(categorySlug) : undefined;
   const teaser = cfg?.products.find((p) => p.slug === slug);
   const image = product.images?.[0] || teaser?.cardImage || cfg?.cardImage;
-  return toMetadata({
-    title,
-    description: shareDescriptionForProduct(slug, product.title),
-    url,
-    image,
-    keywords: categorySlug ? CATEGORY_SEO[categorySlug]?.keywords : undefined,
-  });
+  const featured = new Set(getSitemapFeaturedProductSlugs());
+  return {
+    ...toMetadata({
+      title,
+      description: shareDescriptionForProduct(slug, product.title),
+      url,
+      image,
+      keywords: categorySlug ? CATEGORY_SEO[categorySlug]?.keywords : undefined,
+    }),
+    robots: featured.has(slug)
+      ? { index: true, follow: true }
+      : { index: false, follow: true },
+  };
 }
