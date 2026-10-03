@@ -199,8 +199,8 @@ export default function SaleCategoryClient({ categorySlug }: Props) {
 
       {categoryFaqs.length > 0 && (
         <FAQs
-          title="Frequently asked questions"
-          subtitle={`Answers about ${categoryTitle} — materials, ordering, and how we work with your brand.`}
+          title={`${categoryTitle} FAQs`}
+          subtitle={`What buyers ask about ${categoryTitle.toLowerCase()} for US retail and e-commerce — structures, materials, and how Brandsface specs the pack.`}
           faqs={categoryFaqs}
         />
       )}

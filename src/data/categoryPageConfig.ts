@@ -5740,161 +5740,285 @@ const _CATEGORY_PAGE_CONFIG_RAW: CategoryPageConfig[] = [
 
   ];
 
-/** Shared product-level FAQs (applied to every teaser unless `faqs` is set on that product). */
+/** Shared product-level FAQs (applied to every teaser unless `faqs` is set on that product). Unique vs homepage and category hubs. */
 const PRODUCT_FAQ_STANDARD: CategoryFaqItem[] = [
   {
-    question: "What is the typical minimum order quantity?",
+    question: "Can I change this product's size, board, or finish after I quote?",
     answer:
-      "MOQs depend on board, print, and finishing. Your product card reflects a common starting quantity; we can often adjust for samples, pilots, or split shipments — ask for a quote.",
+      "Yes. This SKU is a starting spec. On the quote, tell us the dimensions, board, and finish you need and Brandsface will confirm what still fits the structure — or recommend a better blank — before you approve.",
   },
   {
-    question: "How long does production take?",
+    question: "What artwork files do you need for this product page's SKU?",
     answer:
-      "Timing varies by proof cycles, tooling, and lane. A typical range is shown on the product; we lock dates after artwork approval and deposit.",
+      "Send vector logos plus a layered file on our dieline, with bleed and safe zones. If you only have a brand kit, we can place it. Upload what you have with the quote and we will flag missing fonts, images, or barcode space.",
   },
   {
-    question: "Can I customise size, print, and finish?",
+    question: "Can I approve a structural blank or print proof before the full run?",
     answer:
-      "Yes. Share dimensions, artwork, and the unboxing story you want — we align structure, materials, and finishes (foil, emboss, soft-touch, etc.) to your brand.",
+      "Yes. We can supply a white structural sample, a printed proof, or finish swatches for this format so you can check fit and color before production. Ask for samples on the quote if the launch depends on a physical check.",
   },
 ];
 
-/** Category hub FAQs — merged onto each block by `category` key when the raw entry has no `faqs`. */
+/**
+ * Category-hub FAQs only (not reused on PDPs or the homepage).
+ * Keys must match `HomeCard.category`. Every question is unique across categories.
+ * USA is the market served — do not claim US manufacturing.
+ */
 const CATEGORY_FAQ_DEFAULTS: Record<string, CategoryFaqItem[]> = {
-  art_card: [
+  art_card_boxes: [
     {
-      question: "What is an art card folding carton?",
+      question: "What is an art card box, and when should a brand use one?",
       answer:
-        "Art card cartons are paperboard boxes — tuck ends, lock bottoms, sleeves, and more — ideal for retail, subscriptions, and light-to-medium weight products.",
+        "An art card box is a printed paperboard folding carton — tuck ends, sleeves, and lock bottoms — for cosmetics, supplements, food gifts, and subscription SKUs. Brandsface specs art card when you need sharp print and a retail-ready pack that still ships efficiently to US warehouses.",
     },
     {
-      question: "Do you match brand colours and proofs?",
+      question: "Which structure is better: tuck end, reverse tuck, or auto-lock bottom?",
       answer:
-        "We work from your brand guidelines, supply chain proofs, and dielines so colour, registration, and scores match what you expect on shelf and in the mail stream.",
+        "Straight tuck ends suit fast retail packing. Reverse tucks hide the thumb cut on the display face. Auto-lock bottoms hold more weight without tape. Share your fill line and product weight and we will pick the carton style that packs cleanly.",
     },
     {
-      question: "Are sustainable stocks available?",
+      question: "What board weight should I spec for retail art card packaging?",
       answer:
-        "Yes. We can specify recycled content, FSC-aligned papers, and finishes that suit your sustainability story — tell us your targets and region.",
+        "Most product cartons land in a mid-to-heavy paperboard range so walls stay square on shelf. Heavier GSM reads more premium; lighter GSM cuts freight. Brandsface confirms caliper after we know your SKU size, window, and whether the carton must survive a mailer.",
+    },
+    {
+      question: "Can folding cartons survive US e-commerce if they are not corrugated?",
+      answer:
+        "Art card is a primary pack, not a shipper. For DTC we usually nest the carton inside a corrugated mailer so print stays scuff-free. If you need a single-piece mailer, we will move you to corrugated instead of over-speccing paperboard.",
+    },
+    {
+      question: "Which finishes work on custom art card boxes besides CMYK?",
+      answer:
+        "Foil, spot UV, emboss, soft-touch, matte or gloss lamination, and PET windows are common on art card. We proof registration so foil and UV sit on the brand marks, not on scores. Tell us the unboxing moment you want and we will spec finishes that still machine well.",
+    },
+    {
+      question: "Do art card boxes arrive assembled or as flat blanks?",
+      answer:
+        "Most art card cartons ship as flat blanks to save cube into the USA, then pop up on your packing line. Sleeves and some lock-bottom styles may need a different fold. Your quote states how they arrive so fulfillment can plan labor.",
     },
   ],
   rigid_boxes: [
     {
-      question: "What makes rigid boxes different from folding cartons?",
+      question: "How is a rigid box different from a folding carton?",
       answer:
-        "Rigid boxes use thicker wrapped board for a premium feel — magnetic closures, drawers, lift-off lids, and inserts are common for luxury and gift programmes.",
+        "A rigid box is wrapped, thick board that does not collapse — magnetic closures, lift-off lids, and drawers. Folding cartons crease from a blank. Choose rigid when the unboxing has to feel like a gift; choose art card when you need high-volume retail cartons.",
     },
     {
-      question: "Can you engineer inserts for my product?",
+      question: "When does a magnetic closure beat a lift-off lid or drawer?",
       answer:
-        "We design foam, paper, and fabric inserts to cradle your SKU, control movement, and elevate unboxing — share product CAD or samples when you quote.",
+        "Magnetic lids are fastest for gifting and influencer kits. Lift-off lids show a reveal when the cover comes off. Drawers control the reveal and hide the product until pulled. Brandsface recommends the closure from how the customer will open it, not from a catalog default.",
     },
     {
-      question: "What lead times should I plan for?",
+      question: "Can you build foam, paper, or fabric inserts for jewelry and cosmetics?",
       answer:
-        "Rigid runs usually need more time for wrapping, tooling, and QC. Your product page lists a typical window; rush options may be available by lane.",
+        "Yes. We nest EVA, paperboard, or fabric-wrapped wells so bottles, compacts, and jewelry do not rattle. Send a sample or dimensions with your quote. Inserts are engineered with the wrap so the cavity and the lid close square.",
+    },
+    {
+      question: "Are rigid boxes the right pack for beauty, jewelry, and electronics kits?",
+      answer:
+        "They are when perceived value and protection both matter — skincare sets, watches, earbuds, and PR kits. If you only need a printed sleeve around a product, art card is usually leaner. We will not upsell rigid when a carton plus mailer is the better US-market spec.",
+    },
+    {
+      question: "Can rigid boxes be wrapped in kraft, linen, or soft-touch paper?",
+      answer:
+        "Yes. Wrap stocks include coated, kraft, textured, and soft-touch papers, with optional foil or deboss on the lid. The wrap is what customers touch first, so we match it to the brand system used on your cartons and labels.",
+    },
+    {
+      question: "Why do rigid boxes need more production planning than cartons?",
+      answer:
+        "Wrapping, magnets, inserts, and QC add steps after print. Artwork still must lock before that work starts. Plan rigid earlier than folding cartons, especially for US holiday and launch dates — your quote includes a production window after approval.",
     },
   ],
   corrugated_boxes: [
     {
-      question: "Which flute and board grades do you offer?",
+      question: "Which flute should I choose for shipping: E, B, or C?",
       answer:
-        "We match E/B/C flutes and kraft or white liners to stacking strength, print, and cost — e-commerce shippers, retail trays, and heavy-duty formats.",
+        "E-flute prints cleaner for retail-ready mailers. B-flute balances print and stacking. C-flute is for heavier or warehouse cartons. Brandsface matches flute to product weight, drop risk, and whether the box is seen by the customer or only by the carrier.",
     },
     {
-      question: "Can corrugated be printed inside and out?",
+      question: "When should I use a mailer instead of an RSC shipping box?",
       answer:
-        "Yes — flexo and litho options depending on run length and artwork. We help you pick the best print method for your brand and budget.",
+        "Use a mailer (often a roll-end tuck or similar) for single-SKU DTC so the customer opens a branded pack. Use an RSC when you are palletizing, mixing SKUs, or need fast tape-and-ship. Share your fulfillment method and we will spec the blank that packs on that line.",
     },
     {
-      question: "Do you design for parcel and fulfilment?",
+      question: "Can custom corrugated boxes be printed in full color?",
       answer:
-        "We optimise dimensions for DIM weight, void fill, and damage rates so your shipper survives the last mile.",
+        "Yes. Short-run and premium work often uses litho-laminate or high-quality print on white liner; longer shipper runs may use flexo. We pick the print method from artwork, quantity, and whether the box is a brand moment or a brown shipper with a logo.",
+    },
+    {
+      question: "How do I keep DIM weight down on US parcel mailers?",
+      answer:
+        "Right-size the blank to the product, cut unnecessary void, and avoid oversize flutes. Carriers bill the greater of actual and dimensional weight. We design corrugated mailers around your SKU so you are not paying to ship air to US addresses.",
+    },
+    {
+      question: "Should the inside of a corrugated shipper be branded too?",
+      answer:
+        "Interior print pays off when unboxing is filmed or the mailer is the gift wrap. Skip it on bulk warehouse cartons. If you want a surprise inside, we can print a pattern or message on the inner liner without changing the outer shipper graphics.",
+    },
+    {
+      question: "What makes a corrugated box retail-ready instead of warehouse-only?",
+      answer:
+        "Retail-ready packs use cleaner print, white or kraft that matches the brand, and structures that open into a tray or shelf-ready unit. Warehouse RSCs optimize compression and tape. Tell us if the box will sit on a US retail floor or only in a 3PL.",
     },
   ],
   custom_pouches: [
     {
-      question: "Which barrier films do you support?",
+      question: "Stand-up, flat, or spout pouch — which format fits my fill line?",
       answer:
-        "We specify films for moisture, oxygen, and shelf life goals — matte, gloss, metallised, and recyclable options where the application allows.",
+        "Stand-up pouches (doypacks) own shelf presence for snacks, coffee, and beauty refills. Flat three-side seals are lean for sachets and samples. Spout pouches fit liquids and squeezable formulas. Share how you fill — hopper, nozzle, or hand — and Brandsface will spec seals that run.",
     },
     {
-      question: "Can pouches include zippers, valves, or spouts?",
+      question: "What barrier film do I need for moisture, oxygen, or aroma?",
       answer:
-        "Yes. Tell us your fill process, retail requirements, and consumer use case — we’ll recommend workable features and seal zones.",
+        "Barrier depends on the product: coffee and nuts need aroma and oxygen control; powders need moisture holdout; cosmetics may need a different film stack. We spec matte, gloss, metallized, or clearer structures to the shelf-life target you give us — not a one-film default.",
     },
     {
-      question: "What artwork formats do you need?",
+      question: "Can pouches include a zipper, tear notch, valve, or hang hole?",
       answer:
-        "Vector dielines plus layered artwork; we provide templates and review safe zones, barcodes, and nutrition panels when applicable.",
+        "Yes. Zippers for reopen, tear notches for first open, valves for degassing, hang holes or euro slots for pegs, and spouts for liquids. Features change seal zones, so we place them on the dieline before you spend on artwork.",
+    },
+    {
+      question: "Are kraft or recyclable pouches an option for US CPG brands?",
+      answer:
+        "Where the product and supply chain allow, we can spec kraft-look or more recyclable structures. Barrier and recycle claims have to match the film, so we will not print an eco claim the pack cannot support. Tell us your sustainability target and category.",
+    },
+    {
+      question: "How should pouch artwork and dielines be prepared?",
+      answer:
+        "Use the Brandsface dieline: vector brand marks, layered art, safe zones away from seals and zippers, and scannable barcodes. We review nutrition or INCI panels when they apply so type does not fall into the gusset on a US retail SKU.",
+    },
+    {
+      question: "Will a custom pouch stand on a grocery or beauty shelf?",
+      answer:
+        "A stand-up pouch with a proper bottom gusset and fill volume will stand. Under-fill and it slumps; over-fill and seals stress. We size the pouch to your grams or milliliters so it faces shoppers, not the peg behind it.",
     },
   ],
   carry_bags: [
     {
-      question: "What handle and paper options exist?",
+      question: "What is the difference between paper, kraft, and luxury laminated carry bags?",
       answer:
-        "Twisted, flat, or ribbon handles; kraft, coated, and laminated stocks — we balance load, hand-feel, and print for retail and events.",
+        "Paper coated bags take crisp brand color for boutiques. Natural kraft reads eco and artisan. Laminated luxury bags add stiffness, gloss or matte, and heavier load for beauty and fashion. Brandsface matches the bag to the box family so checkout still looks like one brand.",
     },
     {
-      question: "Can bags match our exact brand colours?",
+      question: "Which handle is strongest for retail checkout?",
       answer:
-        "We match Pantone and brand systems with print proofs so bags align with your packaging family.",
+        "Twisted handles take more weight for apparel and multi-item baskets. Flat paper handles are lighter for cosmetics. Ribbon or rope handles are for gifting. We spec handle, patch, and board together so the bag does not tear at the US checkout counter.",
     },
     {
-      question: "What minimums apply to custom bags?",
+      question: "Can carry bags color-match my boxes and labels as one set?",
       answer:
-        "MOQs vary by size, print, and lamination. Use the product listing as a guide and request a quote for your artwork and quantity.",
+        "Yes. We proof bags against the same brand palette as your cartons and tags so the shopping bag is not a near-miss. If you already have a rigid or art card job, send that standard and we will align the bag print.",
+    },
+    {
+      question: "What bag size works for apparel versus cosmetics?",
+      answer:
+        "Apparel needs height and a wider gusset for folded garments. Cosmetics and jewelry use smaller, stiffer bags so bottles do not slump. Share the largest SKU you will bag and we will size to that, not to a generic template.",
+    },
+    {
+      question: "Are paper shopping bags recyclable after checkout?",
+      answer:
+        "Unlaminated paper and kraft bags are typically easier to recycle in US curbside streams than heavy plastic laminates. If you need a recyclable story, we will avoid coatings that break that claim. Your quote can note the stock so marketing copy stays accurate.",
+    },
+    {
+      question: "Do branded bags work for pop-ups and events as well as stores?",
+      answer:
+        "Yes. The same custom carry bag can run checkout, markets, and gifting if the handle load and print are specced for mixed use. Tell us whether bags stack in a stockroom or go in a touring kit so we can pick board and finish.",
     },
   ],
   kraft_boxes: [
     {
-      question: "When should I choose kraft board?",
+      question: "When should I choose kraft boxes instead of white art card?",
       answer:
-        "Kraft suits natural, artisan, and e-commerce aesthetics — great with one- or two-colour print and recyclable positioning.",
+        "Choose kraft when the brand story is natural, artisan, or low-ink. White art card is better for photographic print and high chroma. Many US organic and DTC brands use kraft as the hero pack and keep art card for a premium SKU.",
     },
     {
-      question: "Can kraft still look premium?",
+      question: "Can kraft packaging look premium without going full-color?",
       answer:
-        "Yes — through structure, black or white ink, subtle foils, and uncoated textures that read authentic on shelf.",
+        "Yes. One or two inks, black or white, a small foil, and a tight structure often look more expensive than flooding kraft with CMYK. Texture does the work. Brandsface will show a print approach that keeps the kraft visible.",
     },
     {
-      question: "Do you ship flat or assembled?",
+      question: "Are kraft mailers strong enough for e-commerce?",
       answer:
-        "Most mailers and cartons ship flat to save freight; we’ll confirm assembly needs for speciality formats.",
+        "Kraft folding cartons are still primary packs. For parcels we often use a kraft-look corrugated mailer or nest the carton. If you want one brown box from pack-out to porch, we will spec flute and liner for that lane instead of stretching a light carton.",
+    },
+    {
+      question: "Can kraft boxes take windows, sleeves, or simple inserts?",
+      answer:
+        "Windows, sleeves, and paper inserts work on kraft when the product should stay visible or cradled. We keep window film and ink choices aligned with your eco story so the pack does not contradict the brand.",
+    },
+    {
+      question: "How do kraft boxes support an eco-positioned US brand?",
+      answer:
+        "Uncoated kraft signals recyclable and honest materials on US natural and e-commerce shelves. Claims still have to match the actual board and coatings. We will spec recycled content or FSC-aligned options when the supply chain supports them.",
+    },
+    {
+      question: "Can kraft boxes be printed with one ink or with full-color graphics?",
+      answer:
+        "Both. Spot color on kraft is the classic look; full-color works when you need a photo or illustration. Ink coverage changes how brown shows through, so we proof on kraft — not on white — before you approve.",
     },
   ],
   labels_and_tags: [
     {
-      question: "Roll or sheet labels — which do I need?",
+      question: "Should I order roll labels, sheet labels, or hang tags?",
       answer:
-        "Rolls for applicators and high volume; sheets for short runs and hand apply. We align core size, unwind, and adhesive to your line.",
+        "Rolls feed applicators and higher volume. Sheets are for short runs and hand apply. Hang tags and swing tickets tell the story on apparel and rigid boxes. Brandsface will match format to how you apply — line, 3PL, or in-house packing.",
     },
     {
-      question: "What finishes are available?",
+      question: "What adhesive sticks to glass, PET, and kraft boxes?",
       answer:
-        "Matte, gloss, soft-touch, foil, emboss, and variable data — we match durability to product surface and climate.",
+        "Glass and PET need different tack than uncoated kraft, and cold-fill or condensation changes the spec. Share the container, wipe-down, and storage temperature. We pair face stock and adhesive so labels do not lift in US retail coolers or bathrooms.",
     },
     {
-      question: "Can you match regulatory and barcode requirements?",
+      question: "Can labels carry a barcode, QR code, or ingredient panel for US retail?",
       answer:
-        "We review legibility, contrast, and placement for retail and regulated categories before production.",
+        "Yes. We keep barcodes and QR codes in high-contrast quiet zones and leave room for INCI or nutrition type. Send the latest legal copy with artwork so we are not squeezing required text after the dieline is locked.",
+    },
+    {
+      question: "When do I need waterproof labels instead of paper?",
+      answer:
+        "Bottles that live in showers, fridges, or ice buckets need film or treated stocks. Dry cartons and hang tags can stay paper. If a paper label will scuff or wrinkle in use, we will move you to a durable face before you reprint.",
+    },
+    {
+      question: "How do hang tags stay consistent with the rest of the pack?",
+      answer:
+        "We print tags on stocks and inks that match your boxes and bags — same palette, same foil if you use it. Hole, string, and fold are specced so the tag sits on the product the way the brand photos it.",
+    },
+    {
+      question: "Can you die-cut unusual label shapes for bottles and seals?",
+      answer:
+        "Yes. Custom contours, tamper seals, and nested kiss-cuts are common. Complex shapes affect rewind and apply, so we check the shape against your applicator or hand-apply method before cutting steel.",
     },
   ],
   "christmas-packaging": [
     {
-      question: "When should I order Christmas packaging?",
+      question: "When should US brands lock Christmas packaging for holiday shipping?",
       answer:
-        "Book Christmas packaging early — typically 8–12 weeks before your ship-by date — so proofs, foil, and packed kits land before November–December peaks.",
+        "Treat Christmas as a dated launch, not a standard carton. Brandsface recommends locking structure and artwork early enough for proofs, foil, and ocean or air into US DCs before November peaks — often 8–12 weeks before your ship-by date, longer for rigid or matching sets.",
     },
     {
-      question: "Can I match boxes, bags, wrap, and tags as one Christmas set?",
+      question: "Can gift boxes, bags, wrap, and tags ship as one matching Christmas collection?",
       answer:
-        "Yes. We colour-match gift boxes, gift bags, wrapping paper, tags, and seals so your Christmas packaging looks like one holiday collection.",
+        "Yes. We color-match Christmas gift boxes, gift bags, wrapping paper, tags, and seals so retail and corporate kits look like one holiday line. Share the hero SKU first and we will extend the palette across the set.",
     },
     {
-      question: "Do you print food-safe Christmas sweet and bakery boxes?",
+      question: "Are Christmas sweet and bakery boxes suitable for food gifts?",
       answer:
-        "We can specify food-adjacent inks, grease-tolerant coatings, and windows for Christmas sweets, chocolates, and bakery gifts — share your fill and region.",
+        "We can spec food-adjacent inks, grease-tolerant coatings, and windows for sweets, chocolates, and bakery gifts. Share the fill, whether it is wrapped, and the US region so coatings and windows match how the gift is packed.",
+    },
+    {
+      question: "What Christmas packaging works for corporate gifting programs?",
+      answer:
+        "Rigid or sturdy art-card gift boxes, matching bags, and a seal or tag scale for client gifts. Keep structures simple so packing teams can assemble hundreds. We quote a kit — box, tissue or wrap, bag — instead of mixing unrelated holiday SKUs.",
+    },
+    {
+      question: "Should holiday boxes use foil stamping or full-color print?",
+      answer:
+        "Foil reads festive on kraft and deep colors; full-color is better for illustrated scenes and photography. Many Brandsface Christmas packs combine a foil logo with CMYK art. We will not put foil on tight type that will break on the stamp.",
+    },
+    {
+      question: "Can Christmas art-card styles convert to year-round gift packaging after December?",
+      answer:
+        "If the structure is a standard tuck, mailer, or bag, you can reprint without holiday graphics for Valentine's, launch kits, or evergreen gifting. Seasonal-only shapes should stay seasonal. Ask us to spec a dual-use carton if you want one blank and two artworks.",
     },
   ],
 };

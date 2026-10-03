@@ -349,3 +349,24 @@ export function productShareMetadata(
       : { index: false, follow: true },
   };
 }
+
+export function faqPageJsonLd(
+  url: string,
+  name: string,
+  faqs: { question: string; answer: string }[],
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    url,
+    name,
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}

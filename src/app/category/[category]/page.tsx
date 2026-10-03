@@ -3,9 +3,10 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import SaleCategoryClient from "@/components/sale/SaleCategoryClient";
 import PageLoader from "@/components/common/PageLoader";
-import { isValidCategorySlug, resolveCategorySlug } from "@/data/categoryPages";
+import { isValidCategorySlug, resolveCategorySlug, getCategoryHubFaqs } from "@/data/categoryPages";
 import { HOME_CARDS } from "@/data/homeCards";
-import { categoryShareMetadata } from "@/lib/seo";
+import { categoryShareMetadata, faqPageJsonLd, siteOrigin } from "@/lib/seo";
+import { categoryHubPath } from "@/lib/routes";
 
 export async function generateStaticParams() {
   return HOME_CARDS.map((c) => ({ category: c.category }));
@@ -35,9 +36,29 @@ export default async function CategoryHubPage({
     notFound();
   }
   const canonical = resolveCategorySlug(category)!;
+  const faqs = getCategoryHubFaqs(canonical);
+  const card = HOME_CARDS.find((c) => c.category === canonical);
+  const origin = siteOrigin();
+
   return (
-    <Suspense fallback={<PageLoader overlay />}>
-      <SaleCategoryClient categorySlug={canonical} />
-    </Suspense>
+    <>
+      {faqs.length > 0 ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              faqPageJsonLd(
+                `${origin}${categoryHubPath(canonical)}`,
+                `${card?.title ?? "Category"} FAQs | Brandsface`,
+                faqs,
+              ),
+            ),
+          }}
+        />
+      ) : null}
+      <Suspense fallback={<PageLoader overlay />}>
+        <SaleCategoryClient categorySlug={canonical} />
+      </Suspense>
+    </>
   );
 }

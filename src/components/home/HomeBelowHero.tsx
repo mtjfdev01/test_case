@@ -7,6 +7,7 @@ import HowItWorks from "@/components/home/HowItWorks";
 import NewHowItWorks from "@/components/home/NewHowItWorks";
 import CreativeDirection from "@/components/home/CreativeDirection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
+import HomeFaqs from "@/components/home/HomeFaqs";
 import Footer from "@/components/home/Footer";
 import AdvanceStudioShowCase from "@/components/common/AdvanceStudioShowCase";
 import AllProductsRowCarousel from "@/components/home/AllProductsRowCarousel";
@@ -73,6 +74,7 @@ export default function HomeBelowHero({ productQuery, onProductQueryChange }: Pr
       </div>
       <CreativeDirection />
       <TestimonialsSection />
+      <HomeFaqs />
       <Footer />
     </>
   );

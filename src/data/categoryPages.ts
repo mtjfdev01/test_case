@@ -474,19 +474,19 @@ export function getRelatedProductsInCategory(currentSlug: string): RelatedCatego
 
 const GENERIC_PDP_FAQS: CategoryFaqItem[] = [
   {
-    question: "What is the typical minimum order quantity?",
+    question: "Can this product be resized or re-specced for my SKU?",
     answer:
-      "MOQs depend on structure, materials, and finish. Each product lists a starting quantity; we can often support pilots or phased rollouts — send a quote for your SKU.",
+      "Yes. The listing is a starting structure. Send dimensions, quantity, and the US ship-to on a quote and Brandsface will confirm board, print, and finish for your product.",
   },
   {
-    question: "How long do production and shipping take?",
+    question: "Do I need a dieline before I request this product?",
     answer:
-      "Lead times vary by tooling, proofs, and fulfilment lane. Your product page shows a typical range; we confirm dates after artwork approval and deposit.",
+      "No. A brand kit or current pack photo is enough to start. We issue a dieline after the structure is locked so artwork sits on the real blank, not a guess.",
   },
   {
-    question: "Can I get a sample before the full order?",
+    question: "Can I get a physical sample of this format first?",
     answer:
-      "Yes. We can provide structural blanks, print proofs, or finish swatches where applicable so you can approve fit, colour, and feel before production.",
+      "Yes. Structural blanks, print proofs, or finish swatches are available where the format allows so you can approve fit and color before the production run.",
   },
 ];
 
@@ -496,7 +496,6 @@ export function getCategoryHubFaqs(categorySlug: string): CategoryFaqItem[] {
   return cfg?.faqs?.length ? cfg.faqs : [];
 }
 
-/** PDP: product FAQs first, then category FAQs; de-duplicated by question text. Unknown slugs get generic FAQs. */
 /** PDP scroll panel: per-product detail blocks from config (unknown slug → generic default). */
 export function getProductDetailBlocks(slug: string): ProductDetailBlock[] {
   const key = slug.trim();
@@ -510,6 +509,7 @@ export function getProductDetailBlocks(slug: string): ProductDetailBlock[] {
   return DEFAULT_PRODUCT_DETAIL_BLOCKS;
 }
 
+/** PDP: product FAQs only. Category-hub FAQs stay on `/category/[slug]` so questions are not repeated on every SKU. */
 export function getMergedFaqsForProductDetail(slug: string): CategoryFaqItem[] {
   const key = slug.trim();
   if (!key) return [...GENERIC_PDP_FAQS];
@@ -517,20 +517,8 @@ export function getMergedFaqsForProductDetail(slug: string): CategoryFaqItem[] {
   for (const c of CATEGORY_PAGE_CONFIG) {
     const p = c.products.find((x) => x.slug === key);
     if (!p) continue;
-
     const productFaqs = p.faqs ?? [];
-    const categoryFaqs = c.faqs ?? [];
-    const seen = new Set<string>();
-    const out: CategoryFaqItem[] = [];
-
-    for (const item of [...productFaqs, ...categoryFaqs]) {
-      const qk = item.question.trim().toLowerCase();
-      if (seen.has(qk)) continue;
-      seen.add(qk);
-      out.push(item);
-    }
-
-    return out.length > 0 ? out : [...GENERIC_PDP_FAQS];
+    return productFaqs.length > 0 ? productFaqs : [...GENERIC_PDP_FAQS];
   }
 
   return [...GENERIC_PDP_FAQS];
