@@ -28,7 +28,7 @@ export const HOME_FAQS: HomeFaqItem[] = [
   {
     question: "What types of custom packaging can you make?",
     answer:
-      "Brandsface makes custom art card boxes, corrugated shippers and mailers, kraft boxes, luxury rigid boxes, stand-up and spout pouches, carry bags, labels and tags, and Christmas packaging. We match structure, print, and finish to your product, shelf, and unboxing.",
+      "Brandsface makes custom folding cartons (art card), corrugated shippers and mailers, kraft boxes, luxury rigid boxes, stand-up and spout pouches, carry bags, labels and tags, and Christmas packaging. We match structure, print, and finish to your product, shelf, and unboxing.",
   },
   {
     question: "Can I print my logo on custom boxes?",

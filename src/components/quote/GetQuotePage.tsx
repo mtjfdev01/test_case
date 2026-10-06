@@ -218,7 +218,7 @@ export default function GetQuotePage() {
               <span className="italic text-[#6b8e6b]">grows your brand</span>
             </h1>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#103a2a]/75 sm:text-base">
-              Get a quote for art-card boxes, metallized cardboard boxes, custom logo boxes, shopping bags, carry bags, labels, tags, stickers, and other print and packaging.
+              Get a quote for folding cartons, art card packaging, metallized cardboard boxes, custom logo boxes, shopping bags, carry bags, labels, tags, stickers, and other print and packaging.
             </p>
 
             <div className="mt-5 flex flex-wrap gap-2">

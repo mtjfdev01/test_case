@@ -1,4 +1,4 @@
-import type { ProductData } from "@/components/product/ProductInfo";
+﻿import type { ProductData } from "@/components/product/ProductInfo";
 
 const ART_CARD_IMAGES = [
   "/assets/images/categories/art_card.jpeg",
@@ -23,7 +23,7 @@ const ART_CARD_SIZES: ProductData["sizes"] = [
 
 const ART_CARD_DEALS: ProductData["deals"] = [
   {
-    title: "Art card line — die-line review included",
+    title: "Folding carton line — die-line review included",
     description:
       "We validate tuck tension, glue flap geometry, and print registration on your dieline before plates — fewer surprises at press.",
     code: "ARTLINE",
@@ -41,7 +41,7 @@ type ArtCardSpec = Pick<ProductData, "slug" | "title" | "description" | "feature
 function artCardProduct(spec: ArtCardSpec): ProductData {
   return {
     ...spec,
-    badges: ["ART CARD", "CMYK + FINISH", "Brandsface STUDIO"],
+    badges: ["FOLDING CARTON", "ART CARD STOCK", "Brandsface STUDIO"],
     deals: ART_CARD_DEALS,
     quantities: ART_CARD_QUANTITIES,
     sizes: ART_CARD_SIZES,
@@ -54,7 +54,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   /* ── Core folding structures ── */
   {
     slug: "tuck-end-art-card-box",
-    title: "Tuck End Art Card Box",
+    title: "Tuck End Folding Carton",
     description:
       "The everyday folding carton — front tuck with friction fit. Fast to pack, economical at scale, and ideal for retail cartons and light DTC.",
     features: [
@@ -66,11 +66,11 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
       { label: "Lead time", value: "10–18 business days" },
     ],
     details:
-      "Tuck end art card boxes are the backbone of folding-carton programs. We tune tuck depth and flap angles for your product weight and fulfilment speed.\n\nPair with matte or gloss laminate, soft-touch, or foil accents for shelf presence without rigid-tooling cost.\n\nBest when you need volume, predictable assembly, and sharp graphics on coated stock.",
+      "Tuck end folding cartons on art card board are the backbone of retail carton programs. We tune tuck depth and flap angles for your product weight and fulfilment speed.\n\nPair with matte or gloss laminate, soft-touch, or foil accents for shelf presence without rigid-tooling cost.\n\nBest when you need volume, predictable assembly, and sharp graphics on coated stock.",
   },
   {
     slug: "reverse-tuck-end-art-card-box",
-    title: "Reverse Tuck End Art Card Box",
+    title: "Reverse Tuck End Folding Carton",
     description:
       "Top and bottom tucks oppose each other — cleaner retail presentation and balanced opening for hand-packed lines.",
     features: [
@@ -86,7 +86,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "straight-tuck-end-art-card-box",
-    title: "Straight Tuck End Art Card Box",
+    title: "Straight Tuck End Folding Carton",
     description:
       "Both tucks on the same panel edge — efficient for machine filling and straight-line graphics on the front face.",
     features: [
@@ -102,7 +102,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "auto-lock-bottom-art-card-box",
-    title: "Auto Lock Bottom Art Card Box",
+    title: "Auto Lock Bottom Folding Carton",
     description:
       "Pop-open base with interlocking flaps — quick assembly at pack stations without tape, strong enough for modest weight.",
     features: [
@@ -118,7 +118,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "crash-lock-bottom-art-card-box",
-    title: "Crash Lock Bottom Art Card Box",
+    title: "Crash Lock Bottom Folding Carton",
     description:
       "One-push crash assembly with high base integrity — faster than auto-lock on high-volume lines when tooling allows.",
     features: [
@@ -134,7 +134,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "sleeve-art-card-box",
-    title: "Sleeve Art Card Box",
+    title: "Sleeve Folding Carton",
     description:
       "Slipcase sleeve over trays or bundles — campaign swaps without changing the inner tray investment.",
     features: [
@@ -150,7 +150,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "pillow-art-card-box",
-    title: "Pillow Art Card Box",
+    title: "Pillow Folding Carton",
     description:
       "Curved pillow pack — compact footprint for accessories, vouchers, and small giftables with minimal material.",
     features: [
@@ -166,7 +166,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "window-art-card-box",
-    title: "Window Art Card Box",
+    title: "Window Folding Carton",
     description:
       "PET or RPET window patches with clean registration — show the product while protecting the film edge in fulfilment.",
     features: [
@@ -182,7 +182,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "hang-tab-art-card-box",
-    title: "Hang Tab Art Card Box",
+    title: "Hang Tab Folding Carton",
     description:
       "Integrated or applied hang tabs for peg and clip strips — retail-ready without a separate hang card.",
     features: [
@@ -198,7 +198,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "two-piece-art-card-box",
-    title: "Two-Piece Art Card Box",
+    title: "Two-Piece Folding Carton",
     description:
       "Telescope lid + base in paperboard — premium presentation at folding-carton economics for giftable programs.",
     features: [
@@ -210,13 +210,13 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
       { label: "Lead time", value: "12–20 business days" },
     ],
     details:
-      "Two-piece art card sets read more gift than single tuck cartons. We calibrate lid slip and finger clearance.\n\nUse for premium sets, limited drops, and retail gifting.\n\nCombine with foil or emboss for quiet luxury.",
+      "Two-piece folding cartons on art card stock read more gift than single tuck cartons. We calibrate lid slip and finger clearance.\n\nUse for premium sets, limited drops, and retail gifting.\n\nCombine with foil or emboss for quiet luxury.",
   },
 
   /* ── Use-case based ── */
   {
     slug: "perfume-art-card-boxes",
-    title: "Perfume Art Card Boxes",
+    title: "Perfume Folding Cartons",
     description:
       "Fragrance cartons with tight registration and weight-rated bases — bottle silhouette, collar clearance, and counter presence.",
     features: [
@@ -232,7 +232,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "skincare-art-card-boxes",
-    title: "Skincare Art Card Boxes",
+    title: "Skincare Folding Cartons",
     description:
       "Routine sets, ampoules, and tubes — panel hierarchy for ingredients, claims, and brand story on coated stock.",
     features: [
@@ -248,7 +248,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "cosmetics-art-card-boxes",
-    title: "Cosmetics Art Card Boxes",
+    title: "Cosmetics Folding Cartons",
     description:
       "Colour cosmetics and compacts — scuff-resistant varnish, tight fits, and campaign-ready sleeves.",
     features: [
@@ -264,7 +264,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "makeup-art-card-boxes",
-    title: "Makeup Art Card Boxes",
+    title: "Makeup Folding Cartons",
     description:
       "Palettes, brushes, and kits — shallow depths, mirror allowances, and refill-friendly layouts.",
     features: [
@@ -280,7 +280,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "soap-art-card-boxes",
-    title: "Soap Art Card Boxes",
+    title: "Soap Folding Cartons",
     description:
       "Bars and sets — grease-resistant coatings, breathable structures, and rustic or clinical aesthetics.",
     features: [
@@ -296,7 +296,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "hair-care-art-card-boxes",
-    title: "Hair Care Art Card Boxes",
+    title: "Hair Care Folding Cartons",
     description:
       "Bottles, pumps, and tubes — tall carton stability, cluster packs, and shelf-ready graphics.",
     features: [
@@ -312,7 +312,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "essential-oil-art-card-boxes",
-    title: "Essential Oil Art Card Boxes",
+    title: "Essential Oil Folding Cartons",
     description:
       "Small bottles and roller formats — drop protection, compliance panels, and oil-safe finishes.",
     features: [
@@ -328,7 +328,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "lipstick-art-card-boxes",
-    title: "Lipstick Art Card Boxes",
+    title: "Lipstick Folding Cartons",
     description:
       "Slim vertical cartons — tight fit for slimline bullets, giftable reveals, and counter-friendly faces.",
     features: [
@@ -344,7 +344,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "serum-art-card-boxes",
-    title: "Serum Art Card Boxes",
+    title: "Serum Folding Cartons",
     description:
       "Dropper bottles and airless packs — height clearance, insert discipline, and clinical or premium tone.",
     features: [
@@ -360,7 +360,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "gift-art-card-boxes",
-    title: "Gift Art Card Boxes",
+    title: "Gift Folding Cartons",
     description:
       "Occasion-ready folding cartons — ribbon, window, and two-piece options for gifting without rigid cost.",
     features: [
@@ -372,13 +372,13 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
       { label: "Lead time", value: "12–20 business days" },
     ],
     details:
-      "Gift art card boxes deliver emotion at volume. We balance unboxing cues with fulfilment realities.\n\nPair with inserts for mixed sets and fragile goods.\n\nIdeal for Q4, corporate gifting, and limited-edition drops.",
+      "Gift folding cartons deliver emotion at volume. We balance unboxing cues with fulfilment realities.\n\nPair with inserts for mixed sets and fragile goods.\n\nIdeal for Q4, corporate gifting, and limited-edition drops.",
   },
 
   /* ── Premium variations ── */
   {
     slug: "printed-art-card-boxes",
-    title: "Printed Art Card Boxes",
+    title: "Printed Folding Cartons",
     description:
       "High-fidelity CMYK on coated board — brand colour governance, proofing, and consistency run to run.",
     features: [
@@ -390,11 +390,11 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
       { label: "Lead time", value: "10–18 business days" },
     ],
     details:
-      "Printed art card is your billboard at folding-carton scale. We manage dot gain and substrate white point.\n\nInterior print turns every open into a second impression.\n\nCore to Brandsface programs that need colour-accurate packaging.",
+      "Printed folding cartons on art card board are your billboard at retail scale. We manage dot gain and substrate white point.\n\nInterior print turns every open into a second impression.\n\nCore to Brandsface programs that need colour-accurate packaging.",
   },
   {
     slug: "foiled-art-card-boxes",
-    title: "Foiled Art Card Boxes",
+    title: "Foiled Folding Cartons",
     description:
       "Hot foil on folding cartons — metallic logos, borders, and typography with controlled register on board.",
     features: [
@@ -410,7 +410,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "embossed-art-card-boxes",
-    title: "Embossed Art Card Boxes",
+    title: "Embossed Folding Cartons",
     description:
       "Blind or registered emboss / deboss on SBS — tactile logos and patterns within paper limits.",
     features: [
@@ -426,7 +426,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "matte-finish-art-card-boxes",
-    title: "Matte Finish Art Card Boxes",
+    title: "Matte Finish Folding Cartons",
     description:
       "Soft-touch and satin matte laminates — fingerprint-friendly luxury with deep, even colour fields.",
     features: [
@@ -442,7 +442,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "gloss-finish-art-card-boxes",
-    title: "Gloss Finish Art Card Boxes",
+    title: "Gloss Finish Folding Cartons",
     description:
       "High-gloss UV or film laminate — saturated colour pop and shelf shine for high-velocity retail.",
     features: [
@@ -458,7 +458,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "spot-uv-art-card-boxes",
-    title: "Spot UV Art Card Boxes",
+    title: "Spot UV Folding Cartons",
     description:
       "Selective gloss UV over matte laminate — logo lift, droplet effects, and editorial contrast.",
     features: [
@@ -474,7 +474,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "window-patch-art-card-boxes",
-    title: "Window Patch Art Card Boxes",
+    title: "Window Patch Folding Cartons",
     description:
       "Precision film patches with clean corners — anti-fog, RPET options, and retail-ready visibility.",
     features: [
@@ -490,7 +490,7 @@ const ART_CARD_SPECS: ArtCardSpec[] = [
   },
   {
     slug: "insert-art-card-boxes",
-    title: "Insert Art Card Boxes",
+    title: "Insert Folding Cartons",
     description:
       "Paper, pulp, and EVA inserts integrated with folding cartons — retention, unboxing rhythm, and recyclability options.",
     features: [

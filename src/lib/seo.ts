@@ -89,10 +89,12 @@ const CATEGORY_SEO: Record<string, SeoCopy> = {
     ],
   },
   art_card_boxes: {
-    title: "Custom Art Card Boxes | Printed Product Boxes | Brandsface",
+    title: "Custom Folding Cartons | Printed Product Boxes | Brandsface",
     description:
-      "Custom art card boxes with premium print and finishing. Custom printed product boxes and retail cartons from a custom box maker serving brands across the USA.",
+      "Custom folding cartons with premium print and finishing on art card board. Custom printed product boxes and retail cartons from a custom box maker serving brands across the USA.",
     keywords: [
+      "custom folding cartons",
+      "folding carton packaging",
       "custom art card boxes",
       "art card packaging",
       "custom printed boxes",
@@ -194,9 +196,9 @@ const PRODUCT_SEO: Record<string, SeoCopy> = {
       "Christmas sweet boxes and candy cartons from a custom box maker serving brands across the USA. Holiday treat packaging for retail and gifting.",
   },
   "christmas-art-card-boxes": {
-    title: "Christmas Art Card Boxes | Brandsface",
+    title: "Christmas Folding Cartons | Brandsface",
     description:
-      "Christmas art card boxes with custom print and foil. Custom printed boxes for seasonal brands, manufactured for the USA market.",
+      "Christmas folding cartons on art card board with custom print and foil. Custom printed boxes for seasonal brands serving the USA market.",
   },
   "christmas-bakery-boxes": {
     title: "Christmas Bakery Boxes | Brandsface",

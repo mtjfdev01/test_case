@@ -27,10 +27,10 @@ const CATALOG_CATEGORIES = [
   },
   {
     id: "art-card-box",
-    title: "Art Cards",
+    title: "Folding Cartons",
     slug: "art_card_boxes",
     description:
-      "Vibrant printed art-card packaging for high-impact presentation where color depth, finish quality, and detail matter.",
+      "Custom folding cartons on art card board for high-impact presentation where color depth, finish quality, and detail matter.",
     tags: ["Print Quality", "Visual Impact", "Premium"],
     image: CATEGORY_IMAGE_MAP["art card box"],
     industries: ["Cosmetics", "Apparel", "Gift Brands"],
@@ -156,7 +156,7 @@ const FILTER_GROUPS = [
   {
     key: "packagingType",
     title: "Browse by Packaging Type",
-    items: ["Christmas Packaging", "Art Cards", "Corrugated Boxes", "Custom Pouches", "Labels", "Hang Tags", "Luxury Packaging", "Rigid Boxes"],
+    items: ["Christmas Packaging", "Folding Cartons", "Corrugated Boxes", "Custom Pouches", "Labels", "Hang Tags", "Luxury Packaging", "Rigid Boxes"],
   },
   {
     key: "materialFinish",

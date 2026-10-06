@@ -276,7 +276,7 @@ export default function AboutPage() {
           <p className="mt-6 text-sm text-[var(--dark-primary-green)]/70">
             Also available:{" "}
             <Link href="/category/art_card_boxes" className="font-semibold text-[var(--dark-primary-green)] underline-offset-2 hover:underline">
-              art card boxes
+              folding cartons
             </Link>
             ,{" "}
             <Link href="/category/kraft_boxes" className="font-semibold text-[var(--dark-primary-green)] underline-offset-2 hover:underline">

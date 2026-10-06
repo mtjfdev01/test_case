@@ -167,7 +167,7 @@ export const DEFAULT_PRODUCT_DETAIL_BLOCKS: ProductDetailBlock[] = [
 ];
 
 const CATEGORY_RANGE_LABEL: Record<string, string> = {
-  art_card_boxes: "art card boxes",
+  art_card_boxes: "folding cartons",
   rigid_boxes: "rigid set-up boxes",
   corrugated_boxes: "corrugated shippers and retail packs",
   custom_pouches: "flexible pouches and barrier films",

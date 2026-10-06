@@ -52,26 +52,26 @@ export const HOME_CARDS: HomeCard[] = [
     ],
   },
   {
-    title: "Art Card Boxes",
+    title: "Folding Cartons",
     category: "art_card_boxes",
     image: "/assets/images/categories/art_card.jpeg",
     color: "#9b8ec4",
-    heroTitle: "Custom Art Card Boxes",
+    heroTitle: "Custom Folding Cartons",
     heroDescription:
-      "Custom art card boxes with vibrant print reproduction, smooth finishing options, and refined construction for premium product categories.",
-    heroCtaText: "Get Art Card Quote",
+      "Custom folding cartons on art card board — vibrant print, smooth finishing options, and refined construction for premium product categories.",
+    heroCtaText: "Get Folding Carton Quote",
     heroSlides: [
       {
-        title: "Custom Art Card Boxes",
+        title: "Custom Folding Cartons",
         description:
-          "Deliver vibrant graphics and premium print quality with art-card boxes tailored for high-impact product displays.",
-        ctaText: "Get Art Card Quote",
+          "Deliver vibrant graphics and premium print quality with folding cartons on art card stock, tailored for high-impact product displays.",
+        ctaText: "Get Folding Carton Quote",
       },
       {
-        title: "Premium Coated Art Card Boxes",
+        title: "Premium Coated Folding Cartons",
         description:
-          "Choose coated art-card stocks for sharper visuals, cleaner details, and elegant finishing that supports premium positioning.",
-        ctaText: "Explore Art Card Finish",
+          "Choose coated art card stocks for sharper visuals, cleaner details, and elegant finishing that supports premium positioning.",
+        ctaText: "Explore Carton Finishes",
       },
     ],
   },

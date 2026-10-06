@@ -117,9 +117,9 @@ const CHRISTMAS_SPECS: ChristmasSpec[] = [
   },
   {
     slug: "christmas-art-card-boxes",
-    title: "Christmas Art Card Boxes",
+    title: "Christmas Folding Cartons",
     description:
-      "Christmas art card boxes — folding cartons on premium coated board with festive print, foil, and sharp seasonal graphics for holiday product lines.",
+      "Christmas folding cartons on art card board — festive print, foil, and sharp seasonal graphics for holiday product lines.",
     features: [
       { label: "Board", value: "SBS / FBB art card 250–400 gsm" },
       { label: "Structure", value: "Tuck, sleeve, or lock-bottom" },
@@ -129,7 +129,7 @@ const CHRISTMAS_SPECS: ChristmasSpec[] = [
       { label: "Lead time", value: "10–18 business days" },
     ],
     details:
-      "Christmas art card boxes deliver high-chroma festive graphics on coated folding carton stock.\n\nThey are the economical seasonal counterpart to rigid gift boxes when you need volume for Christmas retail.\n\nFoil snowflakes, metallic reds, and kraft-and-gold looks are common finishing paths.",
+      "Christmas folding cartons deliver high-chroma festive graphics on coated art card stock.\n\nThey are the economical seasonal counterpart to rigid gift boxes when you need volume for Christmas retail.\n\nFoil snowflakes, metallic reds, and kraft-and-gold looks are common finishing paths.",
   },
   {
     slug: "christmas-bakery-boxes",

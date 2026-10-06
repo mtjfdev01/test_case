@@ -484,23 +484,23 @@
   width: auto !important;
 }
 
-@keyframes hero-kenburns {
+@keyframes hero-slide-in {
   from {
-    transform: scale(1.18) translate3d(-1.5%, 0, 0);
+    transform: translate3d(5%, 0, 0);
+    opacity: 0.92;
   }
   to {
-    transform: scale(1.05) translate3d(1.2%, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
   }
 }
 
-@keyframes hero-reveal {
+@keyframes hero-slide-pan {
   from {
-    clip-path: inset(0 18% 0 0);
-    filter: brightness(0.72) saturate(0.9);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    clip-path: inset(0 0 0 0);
-    filter: none;
+    transform: translate3d(-2.5%, 0, 0);
   }
 }
 
@@ -537,15 +537,14 @@
 }
 
 .home-hero-swiper .hero-photo {
-  transform: scale(1.12);
-  transform-origin: center center;
-  will-change: transform, clip-path, filter;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
 }
 
 .home-hero-swiper .swiper-slide-active .hero-photo {
   animation:
-    hero-reveal 1.15s cubic-bezier(0.22, 1, 0.36, 1) both,
-    hero-kenburns 8.5s linear 0.2s both;
+    hero-slide-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) both,
+    hero-slide-pan 8.5s linear 0.85s both;
 }
 
 .home-hero-swiper .swiper-slide-active .hero-shine {

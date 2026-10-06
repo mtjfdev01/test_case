@@ -87,7 +87,7 @@ const DISPLAY: Record<string, CategoryDisplayConfig> = {
     ],
   },
   art_card_boxes: {
-    description: "Custom art card boxes with vibrant print, coated stocks, and retail-ready finishing.",
+    description: "Custom folding cartons on art card board with vibrant print, coated stocks, and retail-ready finishing.",
     images: [
       "/assets/images/categories/categories_layout/art_card/art_card%20(1).webp",
       "/assets/images/categories/categories_layout/art_card/art_card%20(2).webp",

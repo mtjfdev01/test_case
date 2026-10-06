@@ -3,12 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Autoplay, EffectFade, Keyboard } from "swiper/modules";
+import { Autoplay, Keyboard } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 
 import "swiper/css";
-import "swiper/css/effect-fade";
 
 const HERO_READY_MAX_MS = 8000;
 const AUTOPLAY_MS = 6500;
@@ -19,6 +18,9 @@ type HeroSlide = {
   mobileSrc: string;
   desktopSrc: string;
   imageAlt: string;
+  /** Tailwind object-position classes; defaults match other category heroes */
+  mobileObjectPosition?: string;
+  desktopObjectPosition?: string;
   eyebrow: string;
   title: string;
   highlight: string;
@@ -32,16 +34,31 @@ const QUOTE_CTA = { href: "/quote", label: "Get a Quote" } as const;
 
 const HERO_SLIDES: HeroSlide[] = [
   {
-    id: "christmas",
+    id: "folding-cartons",
     headingTag: "h1",
+    mobileSrc: "/assets/images/home_hero/v3-mobile-folding.png",
+    desktopSrc: "/assets/images/home_hero/v3-desktop-folding.png",
+    imageAlt:
+      "Custom folding carton assortment — gable boxes, pillow packs, tuck ends, open printed interiors, and foil-accent retail cartons in forest green gold ivory and navy",
+    eyebrow: "Custom Folding Cartons",
+    title: "Printed Cartons",
+    highlight: "Every Style",
+    sub: "Gable, pillow, tuck-end, and sleeve cartons — one premium print system for every SKU.",
+    desc: "Open interiors, foil accents, and soft-touch art card board — custom folding carton packaging for brands across the USA.",
+    primary: { href: "/category/art_card_boxes", label: "Explore Folding Cartons" },
+    secondary: QUOTE_CTA,
+  },
+  {
+    id: "christmas",
+    headingTag: "h2",
     mobileSrc: "/assets/images/home_hero/v3-mobile-christmas.png",
     desktopSrc: "/assets/images/home_hero/v3-desktop-christmas.png",
-    imageAlt: "Four Christmas packaging products: gift bag, wrapping paper, sweet box, and art-card carton",
+    imageAlt: "Four Christmas packaging products: gift bag, wrapping paper, sweet box, and folding carton",
     eyebrow: "Custom Christmas Packaging",
     title: "Christmas Gift Boxes",
     highlight: "Bags & Wrap",
     sub: "Four premium Christmas formats for retail, hampers, and corporate gifting.",
-    desc: "Gift bags, wrapping paper, sweet boxes, and festive art-card cartons — one seasonal brand look.",
+    desc: "Gift bags, wrapping paper, sweet boxes, and festive folding cartons — one seasonal brand look.",
     primary: { href: "/category/christmas-packaging", label: "Explore Christmas Packaging" },
     secondary: QUOTE_CTA,
   },
@@ -64,11 +81,11 @@ const HERO_SLIDES: HeroSlide[] = [
     headingTag: "h2",
     mobileSrc: "/assets/images/home_hero/v3-mobile-collection.png",
     desktopSrc: "/assets/images/home_hero/v3-desktop-collection.png",
-    imageAlt: "Kraft window pouch, art-card burger and fry cartons, carry bag, kraft box, and hang tags",
+    imageAlt: "Kraft window pouch, folding carton food packs, carry bag, kraft box, and hang tags",
     eyebrow: "Custom Packaging Company",
     title: "Boxes, Bags",
     highlight: "Pouches & Labels",
-    sub: "One product from each remaining line — art card, corrugated, pouches, bags, kraft, and tags.",
+    sub: "One product from each remaining line — folding cartons, corrugated, pouches, bags, kraft, and tags.",
     desc: "Premium packaging for every idea, industry, and occasion across the USA.",
     primary: { href: "/catalog", label: "Explore All Products" },
     secondary: QUOTE_CTA,
@@ -123,6 +140,8 @@ function HeroSlidePhoto({
 
   const showMobile = isDesktop !== true;
   const showDesktop = isDesktop !== false;
+  const mobilePos = item.mobileObjectPosition ?? "object-[center_88%]";
+  const desktopPos = item.desktopObjectPosition ?? "object-[78%_center]";
 
   return (
     <>
@@ -137,8 +156,8 @@ function HeroSlidePhoto({
           sizes="100vw"
           className={
             isDesktop === null
-              ? "object-cover object-[center_88%] lg:hidden"
-              : "object-cover object-[center_88%]"
+              ? `object-cover ${mobilePos} lg:hidden`
+              : `object-cover ${mobilePos}`
           }
         />
       ) : null}
@@ -153,8 +172,8 @@ function HeroSlidePhoto({
           sizes="100vw"
           className={
             isDesktop === null
-              ? "hidden object-cover object-[78%_center] lg:block"
-              : "object-cover object-[78%_center]"
+              ? `hidden object-cover ${desktopPos} lg:block`
+              : `object-cover ${desktopPos}`
           }
         />
       ) : null}
@@ -273,11 +292,11 @@ export default function HomeHero({ onReady }: HomeHeroProps) {
       className="relative h-[calc(100dvh-var(--site-header-h))] max-h-[calc(100dvh-var(--site-header-h))] w-full max-w-full overflow-hidden bg-[var(--dark-primary-green)]"
     >
       <Swiper
-        modules={[Autoplay, EffectFade, Keyboard]}
-        effect="fade"
-        fadeEffect={{ crossFade: true }}
+        modules={[Autoplay, Keyboard]}
         loop
-        speed={1100}
+        speed={900}
+        spaceBetween={0}
+        slidesPerView={1}
         initialSlide={0}
         keyboard={{ enabled: true }}
         autoplay={{ delay: AUTOPLAY_MS, disableOnInteraction: false, pauseOnMouseEnter: true }}
