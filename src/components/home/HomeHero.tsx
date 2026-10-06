@@ -140,7 +140,6 @@ function HeroSlidePhoto({
 
   const showMobile = isDesktop !== true;
   const showDesktop = isDesktop !== false;
-  const mobilePos = item.mobileObjectPosition ?? "object-[center_88%]";
   const desktopPos = item.desktopObjectPosition ?? "object-[78%_center]";
 
   return (
@@ -149,16 +148,18 @@ function HeroSlidePhoto({
         <Image
           src={item.mobileSrc}
           alt={item.imageAlt}
-          fill
+          width={1080}
+          height={1100}
           priority={priority}
           loading={priority ? "eager" : "lazy"}
           quality={90}
           sizes="100vw"
           className={
             isDesktop === null
-              ? `object-cover ${mobilePos} lg:hidden`
-              : `object-cover ${mobilePos}`
+              ? "h-auto w-full object-cover lg:hidden"
+              : "h-auto w-full object-cover"
           }
+          style={{ width: "100%", height: "auto" }}
         />
       ) : null}
       {showDesktop ? (
@@ -185,11 +186,17 @@ function SlideCopy({ slide, compact = false }: { slide: HeroSlide; compact?: boo
   const Heading = slide.headingTag;
   return (
     <div
-      className={`min-w-0 max-w-full ${compact ? "mx-auto w-full max-w-xl text-center" : "max-w-xl text-left"}`}
+      className={`min-w-0 max-w-full ${
+        compact
+          ? "mx-auto w-full max-w-xl rounded-2xl bg-[#132f2b]/82 px-3.5 py-4 text-center shadow-[0_12px_40px_rgba(19,47,43,0.45)] backdrop-blur-md sm:px-5 sm:py-5"
+          : "max-w-xl text-left"
+      }`}
     >
       <p
-        className={`flex items-center font-semibold uppercase tracking-[0.22em] text-[#c5a059] [text-shadow:0_1px_12px_rgba(19,47,43,0.55)] ${
-          compact ? "justify-center gap-3 text-[10px]" : "justify-start gap-4 text-[11px]"
+        className={`flex items-center font-semibold uppercase tracking-[0.22em] text-[#c5a059] ${
+          compact
+            ? "justify-center gap-3 text-[10px] [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]"
+            : "justify-start gap-4 text-[11px] [text-shadow:0_1px_12px_rgba(19,47,43,0.55)]"
         }`}
       >
         <span className={`h-px bg-[#c5a059]/70 ${compact ? "w-8" : "w-10"}`} aria-hidden />
@@ -197,24 +204,26 @@ function SlideCopy({ slide, compact = false }: { slide: HeroSlide; compact?: boo
         {compact ? <span className="h-px w-8 bg-[#c5a059]/70" aria-hidden /> : null}
       </p>
       <Heading
-        className={`font-[family-name:var(--font-playfair)] font-extrabold leading-[1.12] tracking-normal text-white [text-shadow:0_2px_24px_rgba(19,47,43,0.55)] ${
+        className={`font-[family-name:var(--font-playfair)] font-extrabold leading-[1.12] tracking-normal text-white ${
           compact
-            ? "mt-3 text-[2.05rem] max-[360px]:text-[1.8rem] sm:text-4xl"
-            : "mt-4 text-[2.65rem] xl:text-[3.15rem]"
+            ? "mt-2.5 text-[1.9rem] max-[360px]:text-[1.65rem] sm:text-4xl [text-shadow:0_2px_18px_rgba(0,0,0,0.55)]"
+            : "mt-4 text-[2.65rem] xl:text-[3.15rem] [text-shadow:0_2px_24px_rgba(19,47,43,0.55)]"
         }`}
       >
         <span className="block">{slide.title}</span>
         <span className="mt-1 block text-[#ead9b8]">{slide.highlight}</span>
       </Heading>
       <span
-        className={`mt-4 block h-px bg-gradient-to-r from-[#c5a059] to-transparent ${
-          compact ? "mx-auto w-16" : "w-20"
+        className={`mt-3 block h-px bg-gradient-to-r from-[#c5a059] to-transparent ${
+          compact ? "mx-auto w-16" : "mt-4 w-20"
         }`}
         aria-hidden
       />
       <p
-        className={`font-semibold text-white [text-shadow:0_1px_16px_rgba(19,47,43,0.55)] ${
-          compact ? "mt-3 text-[15px]" : "mt-4 text-[15px] xl:text-base"
+        className={`font-semibold leading-snug text-white ${
+          compact
+            ? "mt-2.5 text-[14px] [text-shadow:0_1px_12px_rgba(0,0,0,0.55)]"
+            : "mt-4 text-[15px] xl:text-base [text-shadow:0_1px_16px_rgba(19,47,43,0.55)]"
         }`}
       >
         {slide.sub}
@@ -224,7 +233,11 @@ function SlideCopy({ slide, compact = false }: { slide: HeroSlide; compact?: boo
           {slide.desc}
         </p>
       )}
-      <div className={`mt-5 flex flex-wrap items-center gap-3 ${compact ? "justify-center" : "mt-7 justify-start"}`}>
+      <div
+        className={`flex flex-wrap items-center gap-3 ${
+          compact ? "mt-4 justify-center" : "mt-7 justify-start"
+        }`}
+      >
         <Link
           href={slide.primary.href}
           className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-semibold text-[#1a3a2a] shadow-lg shadow-black/20 transition-all hover:scale-[1.03] hover:bg-gray-100 active:scale-[0.98] sm:px-8"
@@ -236,7 +249,11 @@ function SlideCopy({ slide, compact = false }: { slide: HeroSlide; compact?: boo
         </Link>
         <Link
           href={slide.secondary.href}
-          className="inline-flex items-center gap-2 rounded-full border border-[#c5a059]/70 px-6 py-3 text-sm font-medium text-white transition-all hover:border-[#c5a059] hover:bg-[#c5a059]/10 sm:px-7"
+          className={`inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-medium text-white transition-all sm:px-7 ${
+            compact
+              ? "border-[#c5a059] bg-[#132f2b]/70 hover:bg-[#c5a059]/20"
+              : "border-[#c5a059]/70 hover:border-[#c5a059] hover:bg-[#c5a059]/10"
+          }`}
         >
           {slide.secondary.label}
         </Link>
@@ -253,7 +270,9 @@ export default function HomeHero({ onReady }: HomeHeroProps) {
   const swiperRef = useRef<SwiperType | null>(null);
   const [active, setActive] = useState(0);
   const [loadRest, setLoadRest] = useState(false);
+  const isDesktop = useIsDesktop();
   const slide = HERO_SLIDES[active] ?? HERO_SLIDES[0];
+  const mobileAutoHeight = isDesktop !== true;
 
   useEffect(() => {
     let cancelled = false;
@@ -286,76 +305,106 @@ export default function HomeHero({ onReady }: HomeHeroProps) {
     };
   }, [onReady]);
 
+  useEffect(() => {
+    const swiper = swiperRef.current;
+    if (!swiper) return;
+    swiper.params.autoHeight = mobileAutoHeight;
+    swiper.update();
+  }, [mobileAutoHeight]);
+
   return (
     <section
       id="home-hero"
-      className="relative h-[calc(100dvh-var(--site-header-h))] max-h-[calc(100dvh-var(--site-header-h))] w-full max-w-full overflow-hidden bg-[var(--dark-primary-green)]"
+      className="relative flex w-full max-w-full flex-col overflow-hidden bg-[var(--dark-primary-green)] lg:block lg:h-[calc(100dvh-var(--site-header-h))] lg:max-h-[calc(100dvh-var(--site-header-h))]"
     >
-      <Swiper
-        modules={[Autoplay, Keyboard]}
-        loop
-        speed={900}
-        spaceBetween={0}
-        slidesPerView={1}
-        initialSlide={0}
-        keyboard={{ enabled: true }}
-        autoplay={{ delay: AUTOPLAY_MS, disableOnInteraction: false, pauseOnMouseEnter: true }}
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-          swiper.autoplay?.stop();
-        }}
-        onSlideChange={(swiper) => {
-          setActive(swiper.realIndex);
-        }}
-        className="home-hero-swiper !h-full min-h-0 w-full max-w-full overflow-hidden [&_.swiper-wrapper]:h-full [&_.swiper-slide]:!h-full [&_.swiper-slide]:max-w-full [&_.swiper-slide]:overflow-hidden"
-      >
-        {HERO_SLIDES.map((item, idx) => (
-          <SwiperSlide key={item.id} className="!h-full overflow-hidden">
-            <div className="relative h-full min-h-0 w-full overflow-hidden">
-              <div className="hero-photo absolute inset-0">
-                <HeroSlidePhoto
-                  item={item}
-                  eager={idx === 0 || loadRest || idx === active}
-                  priority={idx === 0}
+      {/* Mobile: copy first, then full image below (no fixed viewport height) */}
+      <div className="relative z-20 shrink-0 px-3 pb-3 pt-4 sm:px-5 sm:pb-4 sm:pt-6 lg:hidden">
+        <SlideCopy slide={slide} compact />
+      </div>
+
+      <div className="relative w-full lg:absolute lg:inset-0">
+        <Swiper
+          modules={[Autoplay, Keyboard]}
+          loop
+          speed={900}
+          spaceBetween={0}
+          slidesPerView={1}
+          autoHeight={mobileAutoHeight}
+          initialSlide={0}
+          keyboard={{ enabled: true }}
+          autoplay={{ delay: AUTOPLAY_MS, disableOnInteraction: false, pauseOnMouseEnter: true }}
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+            swiper.autoplay?.stop();
+          }}
+          onSlideChange={(swiper) => {
+            setActive(swiper.realIndex);
+          }}
+          className={`home-hero-swiper w-full max-w-full overflow-hidden [&_.swiper-slide]:max-w-full [&_.swiper-slide]:overflow-hidden ${
+            mobileAutoHeight
+              ? "h-auto [&_.swiper-slide]:h-auto"
+              : "!h-full min-h-0 [&_.swiper-wrapper]:h-full [&_.swiper-slide]:!h-full"
+          }`}
+        >
+          {HERO_SLIDES.map((item, idx) => (
+            <SwiperSlide key={item.id} className={mobileAutoHeight ? "h-auto" : "!h-full overflow-hidden"}>
+              <div
+                className={`relative w-full overflow-hidden ${
+                  mobileAutoHeight ? "h-auto" : "h-full min-h-0"
+                }`}
+              >
+                <div
+                  className={`hero-photo ${
+                    mobileAutoHeight ? "relative w-full" : "absolute inset-0"
+                  }`}
+                >
+                  <HeroSlidePhoto
+                    item={item}
+                    eager={idx === 0 || loadRest || idx === active}
+                    priority={idx === 0}
+                  />
+                </div>
+                <span
+                  className="hero-shine pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-1/3 bg-gradient-to-r from-transparent via-[#ead9b8]/25 to-transparent lg:block"
+                  aria-hidden
                 />
               </div>
-              <span
-                className="hero-shine pointer-events-none absolute inset-y-0 left-0 z-[1] w-1/3 bg-gradient-to-r from-transparent via-[#ead9b8]/25 to-transparent"
-                aria-hidden
-              />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[58%] bg-gradient-to-b from-[#132f2b]/92 via-[#132f2b]/64 to-transparent lg:hidden"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[52%] bg-gradient-to-r from-[#132f2b]/92 via-[#132f2b]/58 to-transparent lg:block xl:w-[48%]"
-        aria-hidden
-      />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[#132f2b]/28 via-transparent to-transparent" aria-hidden />
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[52%] bg-gradient-to-r from-[#132f2b]/92 via-[#132f2b]/58 to-transparent lg:block xl:w-[48%]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] hidden bg-gradient-to-t from-[#132f2b]/28 via-transparent to-transparent lg:block"
+          aria-hidden
+        />
 
-      <span className="home-hero-orb pointer-events-none absolute left-[18%] top-[22%] z-[2] hidden h-24 w-24 rounded-full bg-[#c5a059]/18 blur-2xl lg:block" aria-hidden />
-      <span className="home-hero-orb home-hero-orb-b pointer-events-none absolute bottom-[28%] right-[14%] z-[2] hidden h-32 w-32 rounded-full bg-[#ead9b8]/12 blur-3xl lg:block" aria-hidden />
+        <span
+          className="home-hero-orb pointer-events-none absolute left-[18%] top-[22%] z-[2] hidden h-24 w-24 rounded-full bg-[#c5a059]/18 blur-2xl lg:block"
+          aria-hidden
+        />
+        <span
+          className="home-hero-orb home-hero-orb-b pointer-events-none absolute bottom-[28%] right-[14%] z-[2] hidden h-32 w-32 rounded-full bg-[#ead9b8]/12 blur-3xl lg:block"
+          aria-hidden
+        />
 
-      <div className="pointer-events-none absolute inset-0 z-10 flex h-full flex-col px-4 pb-16 pt-6 sm:px-6 sm:pt-8 lg:justify-center lg:px-12 lg:pb-20 lg:pt-10 xl:px-16">
-        <div className="pointer-events-auto lg:hidden">
-          <SlideCopy slide={slide} compact />
-        </div>
-        <div className="pointer-events-auto hidden lg:block">
-          <SlideCopy slide={slide} />
+        {/* Desktop overlay copy */}
+        <div className="pointer-events-none absolute inset-0 z-10 hidden h-full flex-col justify-center px-12 pb-20 pt-10 lg:flex xl:px-16">
+          <div className="pointer-events-auto">
+            <SlideCopy slide={slide} />
+          </div>
         </div>
       </div>
 
-      <div className="absolute bottom-5 right-4 z-40 flex items-center gap-2 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-12 xl:right-16">
+      <div className="absolute bottom-4 right-3 z-40 flex items-center gap-2 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-12 xl:right-16">
         <button
           type="button"
           aria-label="Previous slide"
           onClick={() => swiperRef.current?.slidePrev()}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#c5a059]/60 text-[#ead9b8] transition hover:bg-[#c5a059] hover:text-[#132f2b]"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#c5a059]/60 bg-[#132f2b]/55 text-[#ead9b8] backdrop-blur-sm transition hover:bg-[#c5a059] hover:text-[#132f2b]"
         >
           <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden>
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 6 9 12l6 6" />
@@ -365,7 +414,7 @@ export default function HomeHero({ onReady }: HomeHeroProps) {
           type="button"
           aria-label="Next slide"
           onClick={() => swiperRef.current?.slideNext()}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#c5a059]/60 text-[#ead9b8] transition hover:bg-[#c5a059] hover:text-[#132f2b]"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#c5a059]/60 bg-[#132f2b]/55 text-[#ead9b8] backdrop-blur-sm transition hover:bg-[#c5a059] hover:text-[#132f2b]"
         >
           <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden>
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 6l6 6-6 6" />
