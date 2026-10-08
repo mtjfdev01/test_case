@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 
 const MAX_FILE_BYTES = 8 * 1024 * 1024;
@@ -98,6 +99,7 @@ function BentoTile({
 }
 
 export default function GetQuotePage() {
+  const router = useRouter();
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
@@ -106,7 +108,6 @@ export default function GetQuotePage() {
   const [fileError, setFileError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -186,12 +187,13 @@ export default function GetQuotePage() {
         return;
       }
 
-      setSubmitted(true);
       setFullName("");
       setPhone("");
       setEmail("");
       setRequirement("");
       clearFile();
+      router.push("/thank-you");
+      return;
     } catch {
       setSubmitError("Unable to submit quote right now. Please try again.");
     } finally {
@@ -235,26 +237,6 @@ export default function GetQuotePage() {
 
           <section className="lg:col-span-6 lg:col-start-7 lg:row-span-2 lg:row-start-1 lg:self-center">
             <div className="rounded-[28px] border border-white/80 bg-white/90 p-5 shadow-[0_20px_50px_rgba(16,58,42,0.10)] backdrop-blur-sm sm:p-8">
-              {submitted ? (
-                <div className="px-2 py-6 text-center sm:py-8">
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
-                    <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <h2 className="mt-5 text-xl font-bold text-[#103a2a]">Thank you!</h2>
-                  <p className="mt-2 text-sm leading-relaxed text-[#103a2a]/80 sm:text-base">
-                    Your quote request has been received. We will contact you soon.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => setSubmitted(false)}
-                    className="mt-6 rounded-xl border border-[#103a2a]/20 bg-white px-5 py-2.5 text-sm font-semibold text-[#103a2a] transition hover:bg-[#103a2a]/5"
-                  >
-                    Submit another request
-                  </button>
-                </div>
-              ) : (
                 <form onSubmit={(e) => void handleSubmit(e)} className="space-y-5" noValidate>
                   <div>
                     <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-bold text-[#103a2a]">
@@ -366,7 +348,6 @@ export default function GetQuotePage() {
                     {isSubmitting ? "Submitting…" : "Submit Quote Request"}
                   </button>
                 </form>
-              )}
             </div>
           </section>
 

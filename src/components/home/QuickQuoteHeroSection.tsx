@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 
 const MAX_FILE_BYTES = 8 * 1024 * 1024;
@@ -44,6 +44,7 @@ export default function QuickQuoteHeroSection({
   contentClassName = "",
   cardClassName = "",
 }: QuickQuoteHeroSectionProps) {
+  const router = useRouter();
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -52,7 +53,6 @@ export default function QuickQuoteHeroSection({
   const [fileError, setFileError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -132,12 +132,13 @@ export default function QuickQuoteHeroSection({
         return;
       }
 
-      setSubmitted(true);
       setFullName("");
       setPhone("");
       setEmail("");
       setRequirement("");
       clearFile();
+      router.push("/thank-you");
+      return;
     } catch {
       setError("Unable to submit quote right now. Please try again.");
     } finally {
@@ -221,21 +222,7 @@ export default function QuickQuoteHeroSection({
             the rest.
           </p>
 
-          {submitted ? (
-            <div className="mt-8 rounded-2xl border border-emerald-200 bg-emerald-50/80 px-4 py-5 text-sm text-[#103a2a]">
-              <p className="font-semibold">Thanks — we&apos;ve received your request.</p>
-              <p className="mt-2 text-[#103a2a]/80">
-                For dimensions, materials, and quantities, continue with our full quote form.
-              </p>
-              <Link
-                href="/quote"
-                className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[var(--dark-primary-green)] py-3 text-center text-sm font-bold text-white transition-colors hover:opacity-90"
-              >
-                Complete full quote
-              </Link>
-            </div>
-          ) : (
-            <form onSubmit={(e) => void handleSubmit(e)} className="mt-6 space-y-5" noValidate>
+          <form onSubmit={(e) => void handleSubmit(e)} className="mt-6 space-y-5" noValidate>
               {error ? (
                 <p className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700" role="alert">
                   {error}
@@ -339,7 +326,6 @@ export default function QuickQuoteHeroSection({
                 {isSubmitting ? "Submitting…" : "Get a Quote"}
               </button>
             </form>
-          )}
         </div>
       </div>
     </section>

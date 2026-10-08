@@ -311,6 +311,31 @@ export function aboutShareMetadata(): Metadata {
   });
 }
 
+const THANK_YOU_SEO: SeoCopy = {
+  title: "Thank You for Your Packaging Quote Request | Brandsface",
+  description:
+    "Your custom packaging quote request was received. See next steps, response times, and explore folding cartons, rigid boxes, and Christmas packaging from Brandsface — serving brands across the USA.",
+  keywords: [
+    "packaging quote confirmation",
+    "custom packaging quote",
+    "request packaging quote USA",
+    "custom box quote",
+    "folding carton quote",
+    "rigid box quote",
+    "custom packaging company USA",
+  ],
+};
+
+export function thankYouShareMetadata(): Metadata {
+  return toMetadata({
+    title: THANK_YOU_SEO.title,
+    description: THANK_YOU_SEO.description,
+    url: absoluteUrl("/thank-you"),
+    image: "/assets/images/home_hero/v3-desktop-folding.png",
+    keywords: THANK_YOU_SEO.keywords,
+  });
+}
+
 export function categoryShareMetadata(categorySlug: string): Metadata {
   const card = HOME_CARDS.find((c) => c.category === categorySlug);
   const cfg = getCategoryPageConfig(categorySlug);
