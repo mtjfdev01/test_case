@@ -307,8 +307,14 @@ export default function HomeHero({ onReady }: HomeHeroProps) {
 
   useEffect(() => {
     const swiper = swiperRef.current;
-    if (!swiper) return;
+    if (!swiper || swiper.destroyed) return;
     swiper.params.autoHeight = mobileAutoHeight;
+    // Desktop slides are absolutely positioned, so the first autoHeight pass
+    // (before the viewport is known) measures them as 0 and leaves that inline.
+    if (!mobileAutoHeight) {
+      swiper.el.classList.remove("swiper-autoheight");
+      swiper.wrapperEl.style.height = "";
+    }
     swiper.update();
   }, [mobileAutoHeight]);
 
@@ -349,7 +355,7 @@ export default function HomeHero({ onReady }: HomeHeroProps) {
           {HERO_SLIDES.map((item, idx) => (
             <SwiperSlide key={item.id} className={mobileAutoHeight ? "h-auto" : "!h-full overflow-hidden"}>
               <div
-                className={`relative w-full overflow-hidden ${
+                className={`hero-slide-frame relative w-full overflow-hidden ${
                   mobileAutoHeight ? "h-auto" : "h-full min-h-0"
                 }`}
               >

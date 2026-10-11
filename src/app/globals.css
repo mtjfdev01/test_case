@@ -531,6 +531,19 @@
   max-width: 100%;
 }
 
+/* Desktop: Swiper autoHeight writes an inline wrapper height before the
+   viewport is known. Absolutely positioned hero photos measure as 0, so that
+   inline height stays 0px and hides the image. Force the full-bleed frame. */
+@media (min-width: 1024px) {
+  .home-hero-swiper.swiper,
+  .home-hero-swiper .swiper-wrapper,
+  .home-hero-swiper .swiper-slide,
+  .home-hero-swiper .hero-slide-frame,
+  .home-hero-swiper .hero-photo {
+    height: 100% !important;
+  }
+}
+
 .home-hero-swiper .swiper-wrapper,
 .home-hero-swiper .swiper-slide {
   max-width: 100%;
